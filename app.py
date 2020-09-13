@@ -1,4 +1,5 @@
 import random
+import time
 
 class Player():
 
@@ -53,6 +54,13 @@ class World():
         else:
             self.players = [Player(input('name: '), input('class: ')) for i in range(self.max_players)]
 
+    def start_play(self):
+        if self.max_players == 1:
+            print(f'\n\n\nПриветствую {self.players[0].name}...\n\n')
+    def drow_table(self):
+        print(f'{"♥" * self.players[0].helf}   {self.players[0].palyer_class}')
+            
+
     def generate_item(self, name = '', item_type = ''):
 
         if name == '':
@@ -67,19 +75,21 @@ class World():
                 item = Item(items_food[food], 'food', '')
                 print(f'в мире появился новый прдмет {item.name}')
                 self.items.append(item)
-        
+    
 
 
-        
-world_1 = World('World', 1)
-
-world_1.join_to_world()
-
-item_1 = Item('apple', 'food', '')
 
 
-world_1.players[0].take_something(item_1)
 
-print(world_1.players[0].player_inventory[0].name)
+
+
+
+
+
+# world_1.start_play()
+
+# item_1 = Item('apple', 'food', '')
+
+# world_1.players[0].take_something(item_1)
 
 # world_1.generate_item()
