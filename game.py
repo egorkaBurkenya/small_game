@@ -1,4 +1,6 @@
 from app import *
+import time
+
 
 # print("Здраствуй путник, эта история поведает тебе о молодом мальчике")
 # time.sleep(4)
@@ -18,13 +20,31 @@ world_1 = World('World', 1)
 
 world_1.join_to_world()
 
-i = 0
-print('Загрузка мира...')
-while i < 10:
-    i += 1
-    time.sleep(2)
-    print('.')
+# print('Загрузка мира', end='\r')
+# i = 0
+# while i < 3:
+    
+#     print('Загрузка мира.  ', end='\r')
+#     time.sleep(0.5)
+#     print('Загрузка мира..', end='\r')
+#     time.sleep(0.5)
+#     print('Загрузка мира...', end='\r')
+#     time.sleep(0.5)
+
+#     i += 1
 
 world_1.start_play()
 
-world_1.drow_table()
+world_1.generate_item()
+world_1.players[0].take_something(world_1.items[0])
+
+
+while True:
+    player_chose = world_1.drow_table()
+    if player_chose == '1':
+        world_1.players[0].stats()
+    if player_chose == '2':
+        world_1.players[0].open_inventory()
+
+
+
