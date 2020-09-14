@@ -17,6 +17,7 @@ class Player():
         self.player_inventory = []
         self.max_player_inventory = 5
         self.player_power = 1
+        self.weapon = Weapon('heand', '', '0')
 
     # Функция которая позволяет взять элемента класса Item
 
@@ -38,6 +39,7 @@ class Player():
         print(f'Класс: {self.player_class}')
         print(f'Запас здоровье: {self.helf}')
         print(f'Размер рюкзака: {self.max_player_inventory}')
+        print(f'Оружие: {self.weapon.name}')
         print(f'Сила: {self.player_power}')
         input('\nСкрыть характеристики ENTER')
 
@@ -56,6 +58,7 @@ class Player():
             if use_or_drop == "1":
                 self.helf += int(self.player_inventory[int(use_item) - 1].skill[-1])
                 print(f'+ {"♥" * int(self.player_inventory[int(use_item)-1].skill[-1])}')
+                self.player_inventory.pop(int(use_item - 1))
                 time.sleep(2)
             elif use_or_drop == '2':
                 self.player_inventory.pop(int(use_item) - 1)
@@ -65,18 +68,43 @@ class Player():
         
         # доделать экепировку оружия !
         
-        elif 'power+' in self.player_inventory[int(use_item) - 1].skill:
+        elif 'power+' in self.player_inventory[int(use_item) - 1].power:
             use_or_drop =input(f'\n\nвы хотите:\n1. Экипировать {self.player_inventory[int(use_item) - 1].name} и увеличить вашу атаку на {self.player_inventory[int(use_item) - 1].power[-1]} единиц ?\n2. выбросить ?\n выйти ENTER ')
             if use_or_drop == "1":
+                self.player_power = 1
                 self.player_power += int(self.player_inventory[int(use_item) - 1].power[-1])
                 print(f'+ {"1" * int(self.player_inventory[int(use_item)-1].power[-1])}')
+                self.weapon = self.player_inventory[int(use_item) - 1]
+                self.player_inventory.pop(int(use_item) - 1)
                 time.sleep(2)
             elif use_or_drop == '2':
                 self.player_inventory.pop(int(use_item) - 1)
                 print('предмет был выброшен')
                 time.sleep(2)
             else: pass
+
+
+class Moster():
+
+    def __init__(self, monster_type = 'zombie', power = 1, helf = 5)
         
+        self.monster_type = monster_type 
+        self.power = power 
+        self.helf = helf
+    
+    def damage_from_player(self, damage, world):
+        print(f'вы наносите {self.monster_type} {damage} едениц урона'
+        self.helf -= damage
+        print(f'*# {self.monster_type} - {damage} #*')
+        if self.helf <= 0:
+            print('Монстр повержен')
+              ###############################################################
+        else: 
+
+    
+    
+
+
 # класс предметов
 
 class Item():
@@ -102,6 +130,11 @@ class Weapon(Item):
         print(f'вы подобрали {self.name}')
         time.sleep(2)
 
+    def information(self):
+        os.system(['clear', 'cls'][os.name == os.sys.platform])
+        print(f'Характеристики {self.name}')
+        print(f'\n ')
+        
 
 class World():
 
@@ -111,9 +144,9 @@ class World():
         self.max_players = max_players
         self.max_monsters = max_monsters
         self.players = []
+        self.monsters = []
         self.items = []
         
-
     def join_to_world(self): 
         
         if Player.players_count == self.max_players: print('world is full...')
@@ -148,7 +181,7 @@ class World():
             items_food = ['apple', 'cooke', 'cake']
             items_weapon = ['sword', 'stick', 'gun']
 
-            type_of_item = random.randint(1,2)
+            type_of_item = random.randint(0,2)
             
             if  type_of_item == 1:
                 food = random.randint(0,len(items_food)-1)
@@ -161,8 +194,14 @@ class World():
                 item = Weapon(items_weapon[weapon], '' ,f'power+{random.randint(1,5)}')
                 print(f'в мире появился новый предмет {item.name}')
                 self.items.append(item)
+            else: 
+                print('ничего не появилось...')
+                time.sleep(2)
             time.sleep(2)    
             return item
+    
+    def generate_monster(self):
+
 
 
 

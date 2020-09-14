@@ -36,7 +36,9 @@ world_1.join_to_world()
 world_1.start_play()
 
 world_1.generate_item()
-world_1.players[0].take_something(world_1.items[0])
+try:
+    world_1.players[0].take_something(world_1.items[0])
+except: pass
 
 
 while True:
@@ -46,7 +48,8 @@ while True:
     if player_chose == '2':
         world_1.players[0].open_inventory()
     if player_chose == '3':
-        world_1.players[0].take_something(world_1.generate_item())
+        try: world_1.players[0].take_something(world_1.generate_item())
+        except: pass
 
 
 
