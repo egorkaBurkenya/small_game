@@ -1,7 +1,10 @@
+#Импорт всех нужных библиотек 
+
 import random
 import time
 import os
 
+# Класс игроков 
 class Player():
 
     players_count = 0
@@ -14,7 +17,9 @@ class Player():
         self.player_inventory = []
         self.max_player_inventory = 5
         self.player_power = 1
-    
+
+    # Функция которая позволяет взять элемента класса Item
+
     def take_something(self, something):
         if len(self.player_inventory) == self.max_player_inventory: print('Инвентарь полон')
         else:
@@ -22,6 +27,10 @@ class Player():
             if chose.lower() == 'yes' or chose.lower() == 'y':
                 something.take_it()
                 self.player_inventory.append(something)
+                # world.items = world.items - something
+    
+    # Выводит характеристики игрока
+    
     def stats(self):
         os.system(['clear', 'cls'][os.name == os.sys.platform])
         print('Характеристики персонажа')
@@ -31,6 +40,8 @@ class Player():
         print(f'Размер рюкзака: {self.max_player_inventory}')
         print(f'Сила: {self.player_power}')
         input('\nСкрыть характеристики ENTER')
+
+    # открывает инвентарь и позволяет повзаимодйествовать с предметами в нем 
 
     def open_inventory(self):
         os.system(['clear', 'cls'][os.name == os.sys.platform])
@@ -52,16 +63,22 @@ class Player():
                 time.sleep(2)
             else: pass
         
+        # доделать экепировку оружия !
         
+        elif 'power+' in self.player_inventory[int(use_item) - 1].skill:
+            use_or_drop =input(f'\n\nвы хотите:\n1. Экипировать {self.player_inventory[int(use_item) - 1].name} и увеличить вашу атаку на {self.player_inventory[int(use_item) - 1].power[-1]} единиц ?\n2. выбросить ?\n выйти ENTER ')
+            if use_or_drop == "1":
+                self.player_power += int(self.player_inventory[int(use_item) - 1].power[-1])
+                print(f'+ {"1" * int(self.player_inventory[int(use_item)-1].power[-1])}')
+                time.sleep(2)
+            elif use_or_drop == '2':
+                self.player_inventory.pop(int(use_item) - 1)
+                print('предмет был выброшен')
+                time.sleep(2)
+            else: pass
         
+# класс предметов
 
-        # except: 
-        #     print('\nинвентарь пуст')
-        #     input('\nСкрыть инвентарь ENTER')
-        
-
-
-    
 class Item():
 
     def __init__(self, name, skill):
@@ -76,9 +93,14 @@ class Item():
 
 class Weapon(Item):
 
-    def __init__(self, name,  skill, ):
+    def __init__(self, name,  skill, power = 'power+1'):
 
         super().__init__(name, skill)
+        self.power = power
+
+    def take_it(self):
+        print(f'вы подобрали {self.name}')
+        time.sleep(2)
 
 
 class World():
@@ -102,7 +124,7 @@ class World():
         if table_css == 'base':
             os.system(['clear', 'cls'][os.name == os.sys.platform])
             print(f'{"♥" * self.players[0].helf}   {self.players[0].player_class}')
-            print('\n 1. Мои характеристики\n 2. Инвентарь\n 3. Выйти \n\nВыберите действие')
+            print('\n 1. Мои характеристики\n 2. Инвентарь\n 3. Сгенерировать предмет \n 4. Выйти \n\nВыберите действие')
             return input('\n Цифра: ')
 
     def start_play(self):
@@ -126,14 +148,21 @@ class World():
             items_food = ['apple', 'cooke', 'cake']
             items_weapon = ['sword', 'stick', 'gun']
 
-            type_of_item = 1
+            type_of_item = random.randint(1,2)
             
             if  type_of_item == 1:
                 food = random.randint(0,len(items_food)-1)
                 item = Item(items_food[food], f'helf+{random.randint(1,5)}')
                 print(f'в мире появился новый прдмет {item.name}')
                 self.items.append(item)
-    
+            
+            elif type_of_item == 2:
+                weapon = random.randint(0,len(items_weapon)-1)
+                item = Weapon(items_weapon[weapon], '' ,f'power+{random.randint(1,5)}')
+                print(f'в мире появился новый предмет {item.name}')
+                self.items.append(item)
+            time.sleep(2)    
+            return item
 
 
 

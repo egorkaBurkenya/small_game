@@ -45,6 +45,8 @@ while True:
         world_1.players[0].stats()
     if player_chose == '2':
         world_1.players[0].open_inventory()
+    if player_chose == '3':
+        world_1.players[0].take_something(world_1.generate_item())
 
 
 
