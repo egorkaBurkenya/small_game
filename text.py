@@ -38,3 +38,10 @@ def drow_table(player, table_style = 'base'):
         print(f'{"♥" * player.player_helf}   {player.player_class}')
         print('\n 1. Мои характеристики\n 2. Инвентарь\n 3. Сгенерировать предмет \n 4. Сразиться с монстром \n q. Выйти \n\nВыберите действие')
         return input('\n Цифра: ')
+
+def use_item(item, player):
+    print(f'Хотите скушать {item.name} и востановить {item.skill}?')
+    use = input('\nY/N ')
+    if use.lower() == 'y':
+        player.eat(item)
+    if use.lower() == 'n': print('')

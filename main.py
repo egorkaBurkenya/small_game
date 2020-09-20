@@ -23,7 +23,12 @@ while True:
         world.players[-1].info()
         input('Выход ENTER')
     elif player_chose == '2':
-        pass
+        os.system(['clear', 'cls'][os.name == os.sys.platform])
+        world.players[-1].player_inventory.open_backpack()
+        print('\nВыберите предмет')
+        print('Выйти ENTER')
+        use_item = input('\nЦифра: ')
+        
     elif player_chose == '3':
         pass
     elif player_chose == '4' and table_type == 'monster_spaun':
