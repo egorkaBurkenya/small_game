@@ -97,22 +97,7 @@ class Player():
             else: pass
 
 
-class Monster():
 
-    def __init__(self, monster_type = 'zombie', power = 1, helf = 5):
-        
-        self.monster_type = monster_type 
-        self.power = power 
-        self.helf = helf
-    
-    def damage_from_player(self, damage):
-        print(f'вы наносите {self.monster_type} {damage} едениц урона')
-        print(f'*# {self.monster_type} - {damage} #*')
-        self.helf -= damage
-        if self.helf <= 0:
-            print('Монстр повержен')
-        else: 
-            print(f'Здоровье монстра уменьшилось {self.helf}')
 
     
     
@@ -120,30 +105,7 @@ class Monster():
 
 # класс предметов
 
-class Item():
 
-    def __init__(self, name, skill):
-
-        self.name = name 
-        self.skill = skill
-    
-    def take_it(self): 
-        print(f'вы подобрали {self.name}')
-        time.sleep(2)
-
-
-class Weapon(Item):
-
-    def __init__(self, name,  skill, power = 'power+1'):
-
-        super().__init__(name, skill)
-        self.power = power
-
-    def information(self):
-        os.system(['clear', 'cls'][os.name == os.sys.platform])
-        print(f'Характеристики {self.name}')
-        print(f'\n ')
-        ########################################
         
 
 class World():
