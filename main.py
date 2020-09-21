@@ -2,6 +2,7 @@
 from world import World
 from player import Player
 from logic import *
+from fight import *
 import time
 import os 
 import random
@@ -48,7 +49,7 @@ while True:
         print('\nС каким моснтром ты желаешь сразиться путник?')
         print('Что бы сразиться со всеми монстрами напиши "all" ')
         print('Выйти ENTER')
-        fight(input('\nЦифра: '))
+        fight_setting(input('\nЦифра: '), world.monsters)
     elif player_chose == 'q':
         print('Возвращайся в другой раз путник ...')
         time.sleep(2)

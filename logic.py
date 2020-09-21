@@ -54,5 +54,7 @@ def drow_monster(monster):
     print(f'Сила: {monster.power}')
     print('_____________')
 
-def fight(monster_number = 0):
-    pass
+def drow_player(player):
+    print('#############')
+    print(f'{player.player_name.upper}\nКласс: {player.player_class}\nЗдоровье: {"♥" * player.player_helf} ({player.player_helf})\nСила: {player.player_power}\nОружие: {player.player_weapon.name}')
+    print('#############')
