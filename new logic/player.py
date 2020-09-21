@@ -1,5 +1,5 @@
 from inventory import Inventory
-from item import Weapon
+from weapon import Weapon
 
 class Player():
     
