@@ -1,5 +1,8 @@
 # world class 
 from player import Player
+from items import *
+from monster import Monster
+import random
 
 class World():
     
@@ -20,70 +23,36 @@ class World():
             if player_class.lower() in ['hero', 'human', 'Dark', 'Hunter']:
                 self.players = [Player(name, player_class) for i in range(self.max_players)]
             else: print('такого класса не существует')
-
-    # def drow_table(self, table_css = 'base'):
-    #     if table_css == 'base':
-    #         os.system(['clear', 'cls'][os.name == os.sys.platform])
-    #         print(f'{"♥" * self.players[0].helf}   {self.players[0].player_class}')
-    #         print('\n 1. Мои характеристики\n 2. Инвентарь\n 3. Сгенерировать предмет \n 4. Выйти \n\nВыберите действие')
-    #         return input('\n Цифра: ')
-        
-    #     if table_css == 'monster_spaun':
-    #         os.system(['clear', 'cls'][os.name == os.sys.platform])
-    #         print(f'{"♥" * self.players[0].helf}   {self.players[0].player_class}')
-    #         print('\n 1. Мои характеристики\n 2. Инвентарь\n 3. Сгенерировать предмет \n 4. Сразиться с монстром \n 5. Выйти \n\nВыберите действие')
-    #         return input('\n Цифра: ')
-
-    # def start_play(self):
-    #     if self.max_players == 1:
-    #         os.system(['clear', 'cls'][os.name == os.sys.platform])
-    #         print(f'Приветствую {self.players[0].name}...\n')
-    #     start_chose = input('Желаешь начать игру ?(Yes/No) ')
-    #     if start_chose.lower() == "yes" or start_chose.lower() == "y":
-    #         os.system(['clear', 'cls'][os.name == os.sys.platform])
-    #         print("Начнем же веселье !!!!!!!!!!!!!!!")
-    #         time.sleep(2)
-    #     elif start_chose.lower() == "no" or start_chose.lower() == "n":
-    #         print('Возвращайся в другой раз путник')
-    #         time.sleep(5)
-    #         exit()       
-
-    # def generate_item(self, name = ''):
-
-    #     if name == '':
-
-    #         items_food = ['apple', 'cooke', 'cake']
-    #         items_weapon = ['sword', 'stick', 'gun']
-
-    #         type_of_item = random.randint(1,2)
-            
-    #         if  type_of_item == 1:
-    #             food = random.randint(0,len(items_food)-1)
-    #             item = Item(items_food[food], f'helf+{random.randint(1,5)}')
-    #             print(f'в мире появился новый прдмет {item.name}')
-    #             self.items.append(item)
-    #             time.sleep(2)    
-    #             return item
-            
-    #         elif type_of_item == 2:
-    #             weapon = random.randint(0,len(items_weapon)-1)
-    #             item = Weapon(items_weapon[weapon], '' ,f'power+{random.randint(1,10)}')
-    #             print(f'в мире появился новый предмет {item.name}')
-    #             self.items.append(item)
-    #             time.sleep(2)    
-    #             return item
-    #         else: 
-    #             print('ничего не появилось...')
-    #             time.sleep(2)
-           
     
-    # def generate_monster(self): 
+    def generate_item(self, name = '', skill = 0, item_type = ''):
 
-    #     monster_type = ['zombie', 'dark hero']
+        if name == '':
+            items_food = ['apple', 'cooke', 'cake']
+            items_weapon = ['sword', 'stick', 'gun']
+            item_type = random.randint(1,2)
+            if  item_type == 1:
+                food = random.randint(0,len(items_food)-1)
+                item = Item(items_food[food], random.randint(1,5))
+                print(f'в мире появился новый прдмет {item.name}')
+                self.items.append(item)  
+                return item
+            elif item_type == 2:
+                weapon = random.randint(0,len(items_weapon)-1)
+                item = Weapon(items_weapon[weapon] ,random.randint(1,10))
+                print(f'в мире появилось новое оружие {item.name}')
+                self.items.append(item)   
+                return item
+        else: 
+            if item_type == 'food': self.items.append(Item(name, skill, item_type))
+            elif item_type == 'weapon': self.items.append(Weapon(name, skill, item_type))
 
-    #     self.monsters.append(Monster(monster_type[random.randint(0,len(monster_type) - 1)], random.randint(1,7), random.randint(1,40)))
-    #     print(f'в мире появился монстр {self.monsters[-1].monster_type}')
-    #     time.sleep(2)
+        
+    def generate_monster(self): 
+
+        monster_type = ['zombie', 'dark hero']
+
+        self.monsters.append(Monster(monster_type[random.randint(0,len(monster_type) - 1)], random.randint(1,7), random.randint(1,40)))
+        print(f'в мире появился монстр {self.monsters[-1].monster_type}')
 
     # def fight_with_monster(self, player, monster, world):
     #     os.system(['clear', 'cls'][os.name == os.sys.platform])

@@ -39,9 +39,20 @@ def drow_table(player, table_style = 'base'):
         print('\n 1. Мои характеристики\n 2. Инвентарь\n 3. Сгенерировать предмет \n 4. Сразиться с монстром \n q. Выйти \n\nВыберите действие')
         return input('\n Цифра: ')
 
-def use_item(item, player):
+def use_item(item, player, number):
     print(f'Хотите скушать {item.name} и востановить {item.skill}?')
     use = input('\nY/N ')
     if use.lower() == 'y':
         player.eat(item)
+        player.player_inventory.backpack.pop(number)
     if use.lower() == 'n': print('')
+
+def drow_monster(monster):
+    print('_____________')
+    print(f'{monster.monster_type.upper()}:')
+    print(f'Здоровье: {"♥" * monster.helf} ({monster.helf})')
+    print(f'Сила: {monster.power}')
+    print('_____________')
+
+def fight(monster_number = 0):
+    pass

@@ -9,7 +9,7 @@ class Inventory():
         if len(self.backpack) == 0: print('Рюкзак пуст')
         else: 
             for i in range(len(self.backpack)):
-                print(f'{i}. {self.backpack[i]}')
+                print(f'{i+1}. {self.backpack[i].name}')
             if len(self.backpack) == self.max_len: print('Рюкзак заполен')
 
     def put(self, item):

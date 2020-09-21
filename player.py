@@ -21,7 +21,7 @@ class Player():
 
     def info(self): 
         print(f'Мои характеристики: \n\nИмя: {self.player_name}\nКласс: {self.player_class}\nЗдоровье: {self.player_helf}\nРазмер рюкзака: {self.player_inventory.max_len}\nСила: {self.player_power}\nОружие: {self.player_weapon.name}\n')
-player_1 = Player('Egor', 'QWE')
 
-player_1.player_inventory.open_backpack()
-    
+    def eat(self, food):
+        self.player_helf += food.skill
+        print('♥' * food.skill)

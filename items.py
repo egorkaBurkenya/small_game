@@ -2,7 +2,7 @@
 
 class Item():
     
-    def __init__(self, name, skill = 1):
+    def __init__(self, name, skill = 1, item_type = 'food'):
 
         self.name = name 
         self.skill = skill
@@ -13,9 +13,9 @@ class Item():
     
 class Weapon(Item):
 
-    def __init__(self, name = 'heand',  skill = 0):
+    def __init__(self, name = 'heand',  skill = 0, item_type = 'weapon'):
 
-        super().__init__(name, skill)
+        super().__init__(name, skill, item_type)
     
     def info(self):
         info = f'{self.name} атака {self.skill} едениц'
