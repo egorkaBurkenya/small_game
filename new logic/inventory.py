@@ -12,13 +12,15 @@ class Inventory():
         if type(item) != type(1):
             for i in range(len(self.backpack)): 
                 if self.backpack[i] == item: 
-                    self.backpack.pop[i] 
+                    self.backpack.popi) 
         else: self.backpack.pop(item - 1)
     
     def _open(self):
         return self.backpack
     
     def use_item(self, item_number):
-        return self.backpack[int(item_number) - 1]
+            a = self.backpack[int(item_number) - 1]
+            return a
+        
 
             

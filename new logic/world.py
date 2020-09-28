@@ -21,5 +21,13 @@ class World():
         for i in range(len(World.monsters)): 
             if World.monsters[i] == monster: 
                 World.monsters.pop(i)
-
     
+    @staticmethod
+    def new_item(item):
+        World.items.append(item)
+
+    @staticmethod    
+    def take_item(item):
+        World.players[0].backpack.put(item)
+        for i in range(len(World.items)):
+            if World.items[i] == item: World.items.pop(i)

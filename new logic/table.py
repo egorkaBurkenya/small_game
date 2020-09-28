@@ -44,6 +44,26 @@ class Table():
     
     @staticmethod
     def use_item(item):
+        item = Table.players[0].backpack[int(item) - 1]
         if item.kind == 'food':
-            print('')
+            chose = input(f'Вы хотите скушать {item.name} и востановить {item.treat} сердец ?(y/n)')
+            if chose.lower() == 'y':
+                Table.players[0].backpack[int(item) - 1].eat(Table.players[0])
+                print(f'+ {"♥" * Table.players[0].backpack[int(item) - 1].treat}')
+                Table.players[0].backpack.pop(int(item) - 1)
+            else: pass
+
     
+    @staticmethod
+    def inventory():
+        for i in range(len(Table.players[0].backpack._open())):
+            print(f'{i+1}. {Table.players[0].backpack._open()[i].name}')
+
+    @staticmethod 
+    def new_item(item):
+        print(f'В мире появился новый предмет {item.name} Востанавливает {item.treat}')
+        return item
+    
+    @staticmethod
+    def what_take(item):
+        return input(f'Вы хотите подобрать {item.name} который востанавливает {item.treat} сердец ? (y/n) \n Выйти ENTER')
